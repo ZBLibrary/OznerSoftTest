@@ -43,15 +43,15 @@ class ViewController: UIViewController {
         
         if isConnectde {
             var sumDatas = Data()
-            let bytes:[UInt8] = [0xfe,0x0d,0x00,0x25,0x05]
+            let bytes:[UInt8] = [0xfe,0x0e,0x00,0x25,0x05]
             let ssidData = "Giant".data(using: String.Encoding.utf8)
-            let keyLen = Data.init(bytes: [0x08])
+            let keyLen = Data.init(bytes: [0x09])
             
             sumDatas.append(Data.init(bytes: bytes))
             sumDatas.append(ssidData!)
             sumDatas.append(keyLen)
-            sumDatas.append("012345678".data(using: String.Encoding.utf8)!)
-            
+            sumDatas.append("012345678".data(using: String.Encoding.ascii)!)
+//            sumDatas.append(Data.init(bytes: [0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08]))
             let checkBytes = UnsafeMutablePointer<UInt8>.allocate(capacity: sumDatas.count)
             for i in 0..<sumDatas.count {
                 
