@@ -87,4 +87,8 @@ class GYTools: NSObject {
         
     }
     
+    static func decTohex(number:Int) -> String {
+        return String(format: "%0X", number)
+    }
+    
 }

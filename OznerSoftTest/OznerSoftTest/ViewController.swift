@@ -40,17 +40,24 @@ class ViewController: UIViewController {
         
         wifiPwd.resignFirstResponder()
         wifiName.resignFirstResponder()
+     
         
         if isConnectde {
             var sumDatas = Data()
-            let bytes:[UInt8] = [0xfe,0x0e,0x00,0x25,0x05]
-            let ssidData = "Giant".data(using: String.Encoding.utf8)
-            let keyLen = Data.init(bytes: [0x09])
+//            let bytes:[UInt8] = [0xfe,0x0e,0x00,0x25,0x05]
+//            let ssidData = "Giant".data(using: String.Encoding.utf8)
+//            let keyLen = Data.init(bytes: [0x09])
+            let ssidLength:Int = wifiName.text!.characters.count
+            let keyLegth:Int = wifiPwd.text!.characters.count
+            let bytes:[UInt8] = [0xfe,UInt8(GYTools.decTohex(number: ssidLength + keyLegth))!,0x00,0x25,UInt8(GYTools.decTohex(number: ssidLength))!]
+            
+            let ssidData = wifiName.text!.data(using: String.Encoding.utf8)
+            let keyLen = Data.init(bytes: [UInt8(GYTools.decTohex(number: keyLegth))!])
             
             sumDatas.append(Data.init(bytes: bytes))
             sumDatas.append(ssidData!)
             sumDatas.append(keyLen)
-            sumDatas.append("012345678".data(using: String.Encoding.ascii)!)
+            sumDatas.append(wifiPwd.text!.data(using: String.Encoding.utf8)!)
 //            sumDatas.append(Data.init(bytes: [0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08]))
             let checkBytes = UnsafeMutablePointer<UInt8>.allocate(capacity: sumDatas.count)
             for i in 0..<sumDatas.count {
@@ -64,6 +71,10 @@ class ViewController: UIViewController {
             sumDatas.append(lastByte)
             
             clientSocket.write(sumDatas, withTimeout: -1, tag: 0)
+            
+//            sleep(3)
+//
+//            clientSocket.readData(withTimeout: -1, tag: 0)
         }
         
     }
