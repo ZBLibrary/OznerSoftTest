@@ -16,6 +16,7 @@
 		6873D3251F95EC3C003FF4EA /* OznerSoftTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6873D3241F95EC3C003FF4EA /* OznerSoftTestUITests.swift */; };
 		6873D3351F95ED4B003FF4EA /* GYTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6873D3341F95ED4B003FF4EA /* GYTools.swift */; };
 		688839D11F96E55100009B72 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 688839D01F96E55000009B72 /* Helper.m */; };
+		689C9213200F373800DD90A3 /* OznerTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689C9212200F373800DD90A3 /* OznerTools.swift */; };
 		B020593A93D1139E13FFD6B3 /* Pods_OznerSoftTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9358653929225DDA720E683 /* Pods_OznerSoftTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		688839CB1F96E53A00009B72 /* OznerSoftTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OznerSoftTest-Bridging-Header.h"; sourceTree = "<group>"; };
 		688839CF1F96E55000009B72 /* Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		688839D01F96E55000009B72 /* Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
+		689C9212200F373800DD90A3 /* OznerTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OznerTools.swift; sourceTree = "<group>"; };
 		A9358653929225DDA720E683 /* Pods_OznerSoftTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OznerSoftTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -123,6 +125,7 @@
 				6873D3341F95ED4B003FF4EA /* GYTools.swift */,
 				6873D3081F95EC3C003FF4EA /* Main.storyboard */,
 				6873D30B1F95EC3C003FF4EA /* Assets.xcassets */,
+				689C9212200F373800DD90A3 /* OznerTools.swift */,
 				6873D30D1F95EC3C003FF4EA /* LaunchScreen.storyboard */,
 				6873D3101F95EC3C003FF4EA /* Info.plist */,
 				688839CF1F96E55000009B72 /* Helper.h */,
@@ -353,6 +356,7 @@
 			files = (
 				6873D3071F95EC3C003FF4EA /* ViewController.swift in Sources */,
 				6873D3051F95EC3C003FF4EA /* AppDelegate.swift in Sources */,
+				689C9213200F373800DD90A3 /* OznerTools.swift in Sources */,
 				6873D3351F95ED4B003FF4EA /* GYTools.swift in Sources */,
 				688839D11F96E55100009B72 /* Helper.m in Sources */,
 			);
@@ -531,7 +535,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OznerSoftTest/OznerSoftTest-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -550,7 +554,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Giant.OznerSoftTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OznerSoftTest/OznerSoftTest-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

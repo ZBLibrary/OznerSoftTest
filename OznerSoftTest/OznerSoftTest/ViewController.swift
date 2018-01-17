@@ -23,8 +23,10 @@ class ViewController: UIViewController {
 
         print(GYTools.getWiFiInfo() ?? "" )
 //        wifiName.text = GYTools.getWiFiInfo() ?? ""
-        wifiName.text = "CMCC"
-        wifiPwd.text = "0123456789abcdef"
+        wifiName.text = "haoze"
+        wifiPwd.text = "12344321"
+        
+        sleep(3)
         
         clientSocket = GCDAsyncSocket.init(delegate: self, delegateQueue: DispatchQueue.main)
         
@@ -32,9 +34,14 @@ class ViewController: UIViewController {
         //切换到设备发散的局域网
         try! clientSocket.connect(toHost: "10.10.10.1", onPort: 8080)
         
+        sleep(3)
+        
 //        GYTools.openDeviceWiFiList()
     }
 
+    @IBAction func sendSureAction(_ sender: UIButton) {
+        
+    }
     
     @IBAction func beginSendPwd(_ sender: UIButton) {
         
@@ -49,7 +56,8 @@ class ViewController: UIViewController {
 //            let keyLen = Data.init(bytes: [0x09])
             let ssidLength:Int = wifiName.text!.characters.count
             let keyLegth:Int = wifiPwd.text!.characters.count
-            let bytes:[UInt8] = [0xfe,UInt8(GYTools.decTohex(number: ssidLength + keyLegth))!,0x00,0x25,UInt8(GYTools.decTohex(number: ssidLength))!]
+//            UInt8(GYTools.decTohex(number: ssidLength + keyLegth))!
+            let bytes:[UInt8] = [0xfe,0x0d,0x00,0x25,UInt8(GYTools.decTohex(number: ssidLength))!]
             
             let ssidData = wifiName.text!.data(using: String.Encoding.utf8)
             let keyLen = Data.init(bytes: [UInt8(GYTools.decTohex(number: keyLegth))!])
@@ -72,9 +80,6 @@ class ViewController: UIViewController {
             
             clientSocket.write(sumDatas, withTimeout: -1, tag: 0)
             
-//            sleep(3)
-//
-//            clientSocket.readData(withTimeout: -1, tag: 0)
         }
         
     }
@@ -106,13 +111,26 @@ extension ViewController:GCDAsyncSocketDelegate {
         print(data)
         clientSocket.readData(withTimeout: -1, tag: 0)
         
+        var keyLen = Data.init(bytes: [0xfe,0x05,0x00,0x26])
+        let checkBytes = UnsafeMutablePointer<UInt8>.allocate(capacity: keyLen.count)
+        for i in 0..<keyLen.count {
+            
+            checkBytes[i] = keyLen[i]
+            
+        }
+        let lastByte = Helper.crc8(checkBytes, inLen: UInt16(keyLen.count))
+        keyLen.append(lastByte)
+
+        clientSocket.write(keyLen, withTimeout: -1, tag: 0)
+        
     }
     
     func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
-        print("断开连接")
+//        print("断开连接")
         
         if !isConnectde {
             try! clientSocket.connect(toHost: "10.10.10.1", onPort: 8080)
+            sleep(2)
         }
         
         isConnectde = false
